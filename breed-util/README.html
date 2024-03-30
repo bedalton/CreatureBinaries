@@ -1,0 +1,503 @@
+<html>
+<head>
+    <title>Creatures Breed Util</title>
+    <style>
+
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+        .markdown-body {
+            padding: 15px;
+        }
+    }
+        .markdown-body b,.markdown-body h1,.markdown-body strong,.markdown-body table th{font-weight:var(--base-text-weight-semibold,600)}@media (prefers-color-scheme:dark){.markdown-body{color-scheme:dark;--color-prettylights-syntax-comment:#8b949e;--color-prettylights-syntax-constant:#79c0ff;--color-prettylights-syntax-entity:#d2a8ff;--color-prettylights-syntax-storage-modifier-import:#c9d1d9;--color-prettylights-syntax-entity-tag:#7ee787;--color-prettylights-syntax-keyword:#ff7b72;--color-prettylights-syntax-string:#a5d6ff;--color-prettylights-syntax-variable:#ffa657;--color-prettylights-syntax-brackethighlighter-unmatched:#f85149;--color-prettylights-syntax-invalid-illegal-text:#f0f6fc;--color-prettylights-syntax-invalid-illegal-bg:#8e1519;--color-prettylights-syntax-carriage-return-text:#f0f6fc;--color-prettylights-syntax-carriage-return-bg:#b62324;--color-prettylights-syntax-string-regexp:#7ee787;--color-prettylights-syntax-markup-list:#f2cc60;--color-prettylights-syntax-markup-heading:#1f6feb;--color-prettylights-syntax-markup-italic:#c9d1d9;--color-prettylights-syntax-markup-bold:#c9d1d9;--color-prettylights-syntax-markup-deleted-text:#ffdcd7;--color-prettylights-syntax-markup-deleted-bg:#67060c;--color-prettylights-syntax-markup-inserted-text:#aff5b4;--color-prettylights-syntax-markup-inserted-bg:#033a16;--color-prettylights-syntax-markup-changed-text:#ffdfb6;--color-prettylights-syntax-markup-changed-bg:#5a1e02;--color-prettylights-syntax-markup-ignored-text:#c9d1d9;--color-prettylights-syntax-markup-ignored-bg:#1158c7;--color-prettylights-syntax-meta-diff-range:#d2a8ff;--color-prettylights-syntax-brackethighlighter-angle:#8b949e;--color-prettylights-syntax-sublimelinter-gutter-mark:#484f58;--color-prettylights-syntax-constant-other-reference-link:#a5d6ff;--color-fg-default:#c9d1d9;--color-fg-muted:#8b949e;--color-fg-subtle:#6e7681;--color-canvas-default:#0d1117;--color-canvas-subtle:#161b22;--color-border-default:#30363d;--color-border-muted:#21262d;--color-neutral-muted:rgba(110,118,129,0.4);--color-accent-fg:#58a6ff;--color-accent-emphasis:#1f6feb;--color-attention-subtle:rgba(187,128,9,0.15);--color-danger-fg:#f85149}}@media (prefers-color-scheme:light){.markdown-body{color-scheme:light;--color-prettylights-syntax-comment:#6e7781;--color-prettylights-syntax-constant:#0550ae;--color-prettylights-syntax-entity:#8250df;--color-prettylights-syntax-storage-modifier-import:#24292f;--color-prettylights-syntax-entity-tag:#116329;--color-prettylights-syntax-keyword:#cf222e;--color-prettylights-syntax-string:#0a3069;--color-prettylights-syntax-variable:#953800;--color-prettylights-syntax-brackethighlighter-unmatched:#82071e;--color-prettylights-syntax-invalid-illegal-text:#f6f8fa;--color-prettylights-syntax-invalid-illegal-bg:#82071e;--color-prettylights-syntax-carriage-return-text:#f6f8fa;--color-prettylights-syntax-carriage-return-bg:#cf222e;--color-prettylights-syntax-string-regexp:#116329;--color-prettylights-syntax-markup-list:#3b2300;--color-prettylights-syntax-markup-heading:#0550ae;--color-prettylights-syntax-markup-italic:#24292f;--color-prettylights-syntax-markup-bold:#24292f;--color-prettylights-syntax-markup-deleted-text:#82071e;--color-prettylights-syntax-markup-deleted-bg:#ffebe9;--color-prettylights-syntax-markup-inserted-text:#116329;--color-prettylights-syntax-markup-inserted-bg:#dafbe1;--color-prettylights-syntax-markup-changed-text:#953800;--color-prettylights-syntax-markup-changed-bg:#ffd8b5;--color-prettylights-syntax-markup-ignored-text:#eaeef2;--color-prettylights-syntax-markup-ignored-bg:#0550ae;--color-prettylights-syntax-meta-diff-range:#8250df;--color-prettylights-syntax-brackethighlighter-angle:#57606a;--color-prettylights-syntax-sublimelinter-gutter-mark:#8c959f;--color-prettylights-syntax-constant-other-reference-link:#0a3069;--color-fg-default:#24292f;--color-fg-muted:#57606a;--color-fg-subtle:#6e7781;--color-canvas-default:#ffffff;--color-canvas-subtle:#f6f8fa;--color-border-default:#d0d7de;--color-border-muted:hsla(210,18%,87%,1);--color-neutral-muted:rgba(175,184,193,0.2);--color-accent-fg:#0969da;--color-accent-emphasis:#0969da;--color-attention-subtle:#fff8c5;--color-danger-fg:#cf222e}}.markdown-body{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;margin:0;color:var(--color-fg-default);background-color:var(--color-canvas-default);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body h1:hover .anchor .octicon-link:before,.markdown-body h2:hover .anchor .octicon-link:before,.markdown-body h3:hover .anchor .octicon-link:before,.markdown-body h4:hover .anchor .octicon-link:before,.markdown-body h5:hover .anchor .octicon-link:before,.markdown-body h6:hover .anchor .octicon-link:before{width:16px;height:16px;content:' ';display:inline-block;background-color:currentColor;-webkit-mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");mask-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>")}.markdown-body details,.markdown-body figcaption,.markdown-body figure{display:block}.markdown-body summary{display:list-item}.markdown-body [hidden],.markdown-body details:not([open])>:not(summary){display:none!important}.markdown-body a{background-color:transparent;color:var(--color-accent-fg);text-decoration:none}.markdown-body abbr[title]{border-bottom:none;text-decoration:underline dotted}.markdown-body .pl-corl,.markdown-body a:hover{text-decoration:underline}.markdown-body dfn{font-style:italic}.markdown-body h1{margin:.67em 0;padding-bottom:.3em;font-size:2em;border-bottom:1px solid var(--color-border-muted)}.markdown-body mark{background-color:var(--color-attention-subtle);color:var(--color-fg-default)}.markdown-body img,.markdown-body table tr{background-color:var(--color-canvas-default)}.markdown-body small{font-size:90%}.markdown-body sub,.markdown-body sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}.markdown-body sub{bottom:-.25em}.markdown-body sup{top:-.5em}.markdown-body img{border-style:none;max-width:100%;box-sizing:content-box}.markdown-body figure{margin:1em 40px}.markdown-body hr{box-sizing:content-box;overflow:hidden;background:0 0;border-bottom:1px solid var(--color-border-muted);height:.25em;padding:0;margin:24px 0;background-color:var(--color-border-default);border:0}.markdown-body kbd,.markdown-body table tr:nth-child(2n){background-color:var(--color-canvas-subtle)}.markdown-body input{font:inherit;margin:0;overflow:visible;font-family:inherit;font-size:inherit;line-height:inherit}.markdown-body [type=button],.markdown-body [type=reset],.markdown-body [type=submit]{-webkit-appearance:button}.markdown-body [type=checkbox],.markdown-body [type=radio]{box-sizing:border-box;padding:0}.markdown-body [type=number]::-webkit-inner-spin-button,.markdown-body [type=number]::-webkit-outer-spin-button{height:auto}.markdown-body [type=search]::-webkit-search-cancel-button,.markdown-body [type=search]::-webkit-search-decoration{-webkit-appearance:none}.markdown-body ::-webkit-input-placeholder{color:inherit;opacity:.54}.markdown-body ::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}.markdown-body ::placeholder{color:var(--color-fg-subtle);opacity:1}.markdown-body hr::before,.markdown-body::before{display:table;content:""}.markdown-body hr::after,.markdown-body::after{display:table;clear:both;content:""}.markdown-body table{border-spacing:0;border-collapse:collapse;display:block;width:max-content;max-width:100%;overflow:auto}.markdown-body kbd,.markdown-body summary h1,.markdown-body summary h2,.markdown-body summary h3,.markdown-body summary h4,.markdown-body summary h5,.markdown-body summary h6{display:inline-block}.markdown-body dl,.markdown-body td,.markdown-body th{padding:0}.markdown-body .task-list-item.enabled label,.markdown-body details summary{cursor:pointer}.markdown-body [role=button]:focus,.markdown-body a:focus,.markdown-body input[type=checkbox]:focus,.markdown-body input[type=radio]:focus{outline:2px solid var(--color-accent-fg);outline-offset:-2px;box-shadow:none}.markdown-body [role=button]:focus:not(:focus-visible),.markdown-body a:focus:not(:focus-visible),.markdown-body input[type=checkbox]:focus:not(:focus-visible),.markdown-body input[type=radio]:focus:not(:focus-visible){outline:transparent solid 1px}.markdown-body [role=button]:focus-visible,.markdown-body a:focus-visible,.markdown-body input[type=checkbox]:focus-visible,.markdown-body input[type=radio]:focus-visible{outline:2px solid var(--color-accent-fg);outline-offset:-2px;box-shadow:none}.markdown-body a:not([class]):focus,.markdown-body a:not([class]):focus-visible,.markdown-body input[type=checkbox]:focus,.markdown-body input[type=checkbox]:focus-visible,.markdown-body input[type=radio]:focus,.markdown-body input[type=radio]:focus-visible{outline-offset:0}.markdown-body kbd{padding:3px 5px;font:11px/10px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;color:var(--color-fg-default);vertical-align:middle;border:solid 1px var(--color-neutral-muted);border-bottom-color:var(--color-neutral-muted);border-radius:6px;box-shadow:inset 0 -1px 0 var(--color-neutral-muted)}.markdown-body code,.markdown-body pre,.markdown-body samp,.markdown-body tt{font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace}.markdown-body .csv-data th,.markdown-body dl dt,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:var(--base-text-weight-semibold,600)}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:var(--base-text-weight-semibold,600);line-height:1.25}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--color-border-muted)}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:var(--color-fg-muted)}.markdown-body blockquote{margin:0;padding:0 1em;color:var(--color-fg-muted);border-left:.25em solid var(--color-border-default)}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol ol,.markdown-body ol[type=i],.markdown-body ul ol{list-style-type:lower-roman}.markdown-body ol ol ol,.markdown-body ol ul ol,.markdown-body ol[type=a],.markdown-body ul ol ol,.markdown-body ul ul ol{list-style-type:lower-alpha}.markdown-body dd{margin-left:0}.markdown-body pre{word-wrap:normal}.markdown-body .octicon{fill:currentColor;display:inline-block;overflow:visible!important;vertical-align:text-bottom;fill:currentColor}.markdown-body input::-webkit-inner-spin-button,.markdown-body input::-webkit-outer-spin-button{margin:0;-webkit-appearance:none;appearance:none}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:var(--color-danger-fg)}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:0}.markdown-body blockquote,.markdown-body details,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:var(--color-fg-default);vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{padding:0 .2em;font-size:inherit}.markdown-body summary h1 .anchor,.markdown-body summary h2 .anchor,.markdown-body summary h3 .anchor,.markdown-body summary h4 .anchor,.markdown-body summary h5 .anchor,.markdown-body summary h6 .anchor{margin-left:-40px}.markdown-body summary h1,.markdown-body summary h2{padding-bottom:0;border-bottom:0}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol[type=A]{list-style-type:upper-alpha}.markdown-body ol[type=I]{list-style-type:upper-roman}.markdown-body div>ol:not([type]),.markdown-body ol[type="1"]{list-style-type:decimal}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid var(--color-border-default)}.markdown-body table tr{border-top:1px solid var(--color-border-muted)}.markdown-body .emoji,.markdown-body table img{background-color:transparent}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid var(--color-border-default)}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:var(--color-fg-default)}.markdown-body span.align-center,.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em .4em;margin:0;font-size:85%;white-space:break-spaces;background-color:var(--color-neutral-muted);border-radius:6px}.markdown-body .task-list-item .handle,.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body samp{font-size:85%}.markdown-body pre code{font-size:100%}.markdown-body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:var(--color-canvas-subtle);border-radius:6px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-num{padding:10px 8px 9px;text-align:right;background:var(--color-canvas-default);border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{background:var(--color-canvas-subtle);border-top:0}.markdown-body .task-list-item label,.markdown-body g-emoji{font-weight:var(--base-text-weight-normal,400)}.markdown-body [data-footnote-ref]::before{content:"["}.markdown-body [data-footnote-ref]::after{content:"]"}.markdown-body .footnotes{font-size:12px;color:var(--color-fg-muted);border-top:1px solid var(--color-border-default)}.markdown-body .footnotes ol{padding-left:16px}.markdown-body .footnotes ol ul{display:inline-block;padding-left:16px;margin-top:16px}.markdown-body .contains-task-list,.markdown-body .footnotes li{position:relative}.markdown-body .footnotes li:target::before{position:absolute;top:-8px;right:-8px;bottom:-8px;left:-24px;pointer-events:none;content:"";border:2px solid var(--color-accent-emphasis);border-radius:6px}.markdown-body .footnotes li:target{color:var(--color-fg-default)}.markdown-body .footnotes .data-footnote-backref g-emoji{font-family:monospace}.markdown-body .pl-c{color:var(--color-prettylights-syntax-comment)}.markdown-body .pl-c1,.markdown-body .pl-s .pl-v{color:var(--color-prettylights-syntax-constant)}.markdown-body .pl-e,.markdown-body .pl-en{color:var(--color-prettylights-syntax-entity)}.markdown-body .pl-s .pl-s1,.markdown-body .pl-smi{color:var(--color-prettylights-syntax-storage-modifier-import)}.markdown-body .pl-ent{color:var(--color-prettylights-syntax-entity-tag)}.markdown-body .pl-k{color:var(--color-prettylights-syntax-keyword)}.markdown-body .pl-pds,.markdown-body .pl-s,.markdown-body .pl-s .pl-pse .pl-s1,.markdown-body .pl-sr,.markdown-body .pl-sr .pl-cce,.markdown-body .pl-sr .pl-sra,.markdown-body .pl-sr .pl-sre{color:var(--color-prettylights-syntax-string)}.markdown-body .pl-smw,.markdown-body .pl-v{color:var(--color-prettylights-syntax-variable)}.markdown-body .pl-bu{color:var(--color-prettylights-syntax-brackethighlighter-unmatched)}.markdown-body .pl-ii{color:var(--color-prettylights-syntax-invalid-illegal-text);background-color:var(--color-prettylights-syntax-invalid-illegal-bg)}.markdown-body .pl-c2{color:var(--color-prettylights-syntax-carriage-return-text);background-color:var(--color-prettylights-syntax-carriage-return-bg)}.markdown-body .pl-sr .pl-cce{font-weight:700;color:var(--color-prettylights-syntax-string-regexp)}.markdown-body .pl-ml{color:var(--color-prettylights-syntax-markup-list)}.markdown-body .pl-mh,.markdown-body .pl-mh .pl-en,.markdown-body .pl-ms{font-weight:700;color:var(--color-prettylights-syntax-markup-heading)}.markdown-body .pl-mi{font-style:italic;color:var(--color-prettylights-syntax-markup-italic)}.markdown-body .pl-mb{font-weight:700;color:var(--color-prettylights-syntax-markup-bold)}.markdown-body .pl-md{color:var(--color-prettylights-syntax-markup-deleted-text);background-color:var(--color-prettylights-syntax-markup-deleted-bg)}.markdown-body .pl-mi1{color:var(--color-prettylights-syntax-markup-inserted-text);background-color:var(--color-prettylights-syntax-markup-inserted-bg)}.markdown-body .pl-mc{color:var(--color-prettylights-syntax-markup-changed-text);background-color:var(--color-prettylights-syntax-markup-changed-bg)}.markdown-body .pl-mi2{color:var(--color-prettylights-syntax-markup-ignored-text);background-color:var(--color-prettylights-syntax-markup-ignored-bg)}.markdown-body .pl-mdr{font-weight:700;color:var(--color-prettylights-syntax-meta-diff-range)}.markdown-body .pl-ba{color:var(--color-prettylights-syntax-brackethighlighter-angle)}.markdown-body .pl-sg{color:var(--color-prettylights-syntax-sublimelinter-gutter-mark)}.markdown-body .pl-corl{color:var(--color-prettylights-syntax-constant-other-reference-link)}.markdown-body g-emoji{display:inline-block;min-width:1ch;font-family:"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";font-size:1em;font-style:normal!important;line-height:1;vertical-align:-.075em}.markdown-body g-emoji img{width:1em;height:1em}.markdown-body .task-list-item{list-style-type:none}.markdown-body .task-list-item+.task-list-item{margin-top:4px}.markdown-body .task-list-item-checkbox{margin:0 .2em .25em -1.4em;vertical-align:middle}.markdown-body .contains-task-list:dir(rtl) .task-list-item-checkbox{margin:0 -1.6em .25em .2em}.markdown-body .contains-task-list:focus-within .task-list-item-convert-container,.markdown-body .contains-task-list:hover .task-list-item-convert-container{display:block;width:auto;height:24px;overflow:visible;clip:auto}.markdown-body ::-webkit-calendar-picker-indicator{filter:invert(50%)}
+    </style>
+</head>
+<body>
+<div class="markdown-body">
+<header>
+<h1 id="creatures-breed-util">Creatures Breed Util</h1>
+</header>
+<p>Command line tool for handling breed conversions and appearance gene alterations for the Creatures games</p>
+<p><strong>Table of Contents</strong>
+<!-- TOC --></p>
+<ul>
+<li><a href="#creatures-breed-util">Creature&#39;s Breed Util</a><ul>
+<li><a href="#basic-information">Basic Information</a><ul>
+<li><a href="#install">Install</a></li>
+<li><a href="#breed-convert-tldr">Breed Convert: TL;DR;</a><ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#macos">MacOS</a></li>
+<li><a href="#linux">Linux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#base-commands">Base Commands</a></li>
+<li><a href="#command-line-basics">Command Line Basics</a><ul>
+<li><a href="#input-files-paths">Input Files: Paths</a></li>
+<li><a href="#current-working-directory">Current Working Directory</a></li>
+<li><a href="#arguments">Arguments</a></li>
+<li><a href="#options">Options</a><ul>
+<li><a href="#regular-options">Regular Options</a><ul>
+<li><a href="#flags">Flags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#convert-breed">Convert-Breed</a><ul>
+<li><a href="#special-conversion-options">Special Conversion Options</a><ul>
+<li><a href="#progressive-arms">Progressive Arms</a></li>
+<li><a href="#missing-tails">Missing Tails:</a></li>
+<li><a href="#altering-genome-breed">Altering Genome Breed</a></li>
+</ul>
+</li>
+<li><a href="#breed-conversion-easy-way">Breed Conversion: Easy Way</a></li>
+<li><a href="#breed-conversion---manual-way">Breed Conversion - Manual Way</a><ul>
+<li><a href="#conversion-options">Conversion Options</a><ul>
+<li><a href="#game-variant">Game Variant</a></li>
+<li><a href="#genus">Genus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#alter-genome">Alter-Genome</a><ul>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a href="#appendix-macos">Appendix: macOS</a><ul>
+<li><a href="#open-terminal">Open Terminal</a><ul>
+<li><a href="#open-terminal-from-spotlight">Open Terminal From Spotlight</a></li>
+<li><a href="#open-terminal-through-finder">Open Terminal Through Finder</a></li>
+</ul>
+</li>
+<li><a href="#gatekeeper">GATEKEEPER</a><ul>
+<li><a href="#allow-program-in-terminal">Allow Program in Terminal</a></li>
+<li><a href="#allow-program-in-system-setting">Allow Program in System Setting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#appendix-windows">Appendix: Windows</a><ul>
+<li><a href="#open-cmd-command-line-window">Open CMD (command line window)</a><!-- TOC -->
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="basic-information">Basic Information</h2>
+<p>This is a command line program, and must be run from the CMD program on Windows or terminal on unix.<br><strong>Be aware of your [current working directory]</strong> as all non-absolute paths will be relative to it.</p>
+<hr>
+<h3 id="install">Install</h3>
+<ol>
+<li>Navigate to the <a href="https://github.com/bedalton/creatures-breed-util/releases">Breed Util Releases</a> page on GitHub</li>
+<li>Download the most recent release for your OS<ul>
+<li>Windows (x64)</li>
+<li>MacOS (x64) - 64-bit Macs (or Arm64 Macs with Rosetta)</li>
+<li>MacOS (arm64) - Arm64 Macs using an arm based terminal</li>
+<li>Linux (x64) - 64-bit linux <em>Compatability is Unknown</em></li>
+<li>Linux (Arm64) - Arm64-bit linux - <em>Compatability is Unknown</em></li>
+</ul>
+</li>
+<li>Extract the contents and copy the binary/exe to the folder of your choosing.</li>
+<li>(Optional) Add this directory to your PATH variable, so it can be referenced from anywhere</li>
+</ol>
+<p>Executable can be referenced by absolute path or relative path if not added to the system PATH variable.</p>
+<p><strong>Node version</strong> is deprecated and not receiving updates</p>
+<hr>
+<h3 id="breed-convert-tl-dr-">Breed Convert: TL;DR;</h3>
+<p><strong>Progressive Arms</strong> (<code>--progressive</code>) - use side arm sprites to mimic front arm sprites.
+See <a href="#progressive-arms">Progressive Arms</a> section<br><strong>Same Size</strong> (<code>--same-size</code>) - make all sprites in a single file the same size<br>-<em>This may prevent crashes some people experience with conversions</em></p>
+<h4 id="windows">Windows</h4>
+<ol>
+<li>Double click <code>breed-util.exe</code>,</li>
+<li>Follow prompts<br>- Answering <code>y</code>/<code>yes</code> or <code>n</code>/<code>no</code> to yes/no questions<br>- Drag in a single folder or a single file when asked<br>- For output genome you will want to drag in the output folder and add a forward-slash and type in the file name</li>
+<li>Press enter when finished</li>
+</ol>
+<h4 id="macos">MacOS</h4>
+<ol>
+<li><a href="#open-terminal">Open Terminal</a></li>
+<li>Drag the downloaded binary <code>breed-util</code> into finder</li>
+<li>Press Enter<ul>
+<li>If macOS does not allow it to run see <a href="#gatekeeper">Gatekeeper</a></li>
+</ul>
+</li>
+<li>Follow prompts<br>- Answering <code>y</code>/<code>yes</code> or <code>n</code>/<code>no</code> to yes/no questions<br>- Drag in a single folder or a single file when asked<br>- For output genome you will want to drag in the output folder and add a slash and type in the file name</li>
+</ol>
+<h4 id="linux">Linux</h4>
+<ol>
+<li>Open a Terminal window</li>
+<li>Run <code>breed-util ask</code> with any desired arguments and options<br>- Options not set initially, will be prompted for answers</li>
+<li>Follow prompts<br>- Answering <code>y</code>/<code>yes</code> or <code>n</code>/<code>no</code> to yes/no questions<br>- Drag in a single folder or a single file when asked<br>- For output genome you will want to drag in the output folder and add a slash and type in the file name</li>
+</ol>
+<hr>
+<h2 id="base-commands">Base Commands</h2>
+<p>The <code>breed-util</code> utility allows for the following sub-commands:</p>
+<p><strong><a href="#breed-conversion-easy-way">ask</a></strong> - Question and answer based breed conversion</p>
+<p><strong><a href="#convert-breed">convert-breed</a></strong> - Convert a breed&#39;s images (and optionally its ATTs) from one game to another</p>
+<p><strong><a href="#alter-genome">alter-genome</a></strong> - Alter the appearance genes of Creatures genome</p>
+<pre><code><span class="hljs-symbol">Usage</span>: 
+    <span class="hljs-keyword">breed-util </span>ask
+    <span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span>{target-game} [options_list] {inputFiles...}
+    <span class="hljs-keyword">breed-util </span>alter-genome [options_list]
+<span class="hljs-symbol">
+Subcommands:</span> 
+    ask - Guided conversion of a <span class="hljs-keyword">breed </span>using quesions/prompts
+    convert-<span class="hljs-keyword">breed </span>- Convert <span class="hljs-keyword">breed </span>files <span class="hljs-keyword">between </span>game formats
+    alter-genome - Alter appearance genes in a Creatures genome
+<span class="hljs-symbol">
+Options:</span> 
+    --help -&gt; 
+        Usage <span class="hljs-meta">info</span> for <span class="hljs-keyword">base </span>command `<span class="hljs-keyword">breed-util </span>--help`, 
+        or child command. i.e. `<span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span>--help`
+</code></pre><hr>
+<h2 id="command-line-basics">Command Line Basics</h2>
+<h3 id="input-files-paths">Input Files: Paths</h3>
+<p>Paths can be relative to the <a href="#current-working-directory">current working directory</a> or absolute.<br>On windows paths are separated with <code>\\</code>. When viewing examples, keep this in mind</p>
+<p>Any time a file or folder is needed, you may drag one into the command line window</p>
+<h3 id="current-working-directory">Current Working Directory</h3>
+<p><strong>Current working directory</strong> is the path your terminal or Command Prompt thinks you are.</p>
+<ul>
+<li>Usually when starting a command prompt or terminal, this is your <strong>HOME</strong> directory</li>
+<li><strong>This is not usually the folder you have open</strong> or are viewing when you open the command prompt.</li>
+<li>To Navigate to the folder you want, us <code>cd</code> (plus a space)<ul>
+<li>then enter/paste the absolute path to the folder<ul>
+<li><code>c:/MyFolder</code> or <code>&quot;/Users/{myname}/My Folder&quot;</code></li>
+</ul>
+</li>
+<li><strong>drag</strong> the folder from explore,finder, etc. into the CMD or Terminal window</li>
+<li>If typing in a folder with a space, surround it with quotation marks</li>
+</ul>
+</li>
+</ul>
+<h3 id="arguments">Arguments</h3>
+<p>Arguments are values that are defined by their position.<br>They do not use a prefix they are simply used.<br>In this README, they will be surrounded by <code>{</code> and <code>}</code><br>i.e. <code>breed-util convert-breed {game-target}</code></p>
+<ul>
+<li><code>breed-util convert-breed</code> is entered as is,</li>
+<li><code>{game-target}</code> must be substituted by the target game</li>
+<li>Example: <code>breed-util convert-breed C2</code></li>
+</ul>
+<h3 id="options">Options</h3>
+<p>come after the <code>breed-util</code> command and its subcommand, and come in two flavors</p>
+<h4 id="regular-options">Regular Options</h4>
+<p>Most options are followed by a value i.e. <code>--input-genus norn</code>.</p>
+<ul>
+<li>Here the <em>option</em> is <code>--input-genus</code> and the <em>value</em> is <code>norn</code></li>
+</ul>
+<h5 id="flags">Flags</h5>
+<p>Flags take <strong>no arguments</strong>, and represent a <strong>true</strong> value to the flag</p>
+<ul>
+<li>Flags take no argument so do not put <code>yes</code> or <code>no</code> after it</li>
+<li><strong>Using a flag</strong> = <strong>true</strong>; Presence of a flag, means that value is true or enabled</li>
+<li><strong>No flag</strong> = <strong>false</strong>; Absence of flag means that value is false</li>
+</ul>
+<hr>
+<h2 id="convert-breed">Convert-Breed</h2>
+<p>Converts a breed&#39;s sprites from one game to another and optionally its ATTs as well</p>
+<p>For C1 to/from C2 or C2e conversions, the tail parts are
+automatically reversed as is needed for C1 tails to the other games and vice-versa</p>
+<p><strong>Note:</strong> This utility does <strong>not</strong> support <strong>Creatures Village/Adventure</strong> in any direction</p>
+<h3 id="special-conversion-options">Special Conversion Options</h3>
+<h4 id="progressive-arms">Progressive Arms</h4>
+<p>C1/C2 breeds only have one front facing pose, so when converted, norns will appear to stare straight at the camera while
+not moving.</p>
+<p>&quot;Progressive arms&quot; adds front facing arm poses for C1/C2 conversions to C3DS. It does so using the side views of the
+arms.<br><strong>Note:</strong> Manual editing of the combined arm ATTs may be necessary</p>
+<p><img src="images/progressive-arms.png" alt="Two images of a male C1 horse norn. One with his arm across his stomach, and the another with an arm raised up as if saying hi"></p>
+<h4 id="missing-tails-">Missing Tails:</h4>
+<p><em>Empty tail sprite and ATTs will be generated automatically</em> if the C1 breed does not have one defined</p>
+<h4 id="altering-genome-breed">Altering Genome Breed</h4>
+<p>Optionally an existing genome for the target game can have its appearance genes altered<br>Genome alteration also <strong>alters the sleep pose</strong> between C1e and C2e conversions</p>
+<ul>
+<li>This prevents creatures from sleeping/dying standing up</li>
+</ul>
+<p><em>\</em>note:<em> This program does not convert a genome, it simply alters an existing genome for the target game       
+</em>i.e. If converting to C3, you must supply an existing C3 genome. <strong>No conversion is done between games*</strong></p>
+<h3 id="breed-conversion-easy-way">Breed Conversion: Easy Way</h3>
+<p><strong>*Convert Through Prompts*</strong></p>
+<p>Using the command line can be daunting, so running <code>breed-util</code> without arguments or with subcommand <code>breed-util ask</code>
+will allow you to convert a breed by answering questions and providing files<br><em>On <strong>windows</strong> you can double-click the EXE to start the breed conversion prompts</em></p>
+<pre><code class="lang-SHELL"><span class="hljs-symbol">$:</span> breed-util
+<span class="hljs-meta"># OR</span>
+<span class="hljs-symbol">$:</span> breed-util ask
+</code></pre>
+<p>When running the easy way, you will be asked questions.<br>Some ask for <code>yes</code>/<code>y</code> or <code>no</code>/<code>n</code>
+or may ask for a file or folder to files see <a href="#input-files-paths">paths</a>.<br>Paths can be relative to the <strong>current working directory</strong> (see <a href="#current-working-directory">current working directory</a>) or absolute.<br>Simplest way is to drag the folder or file into the command terminal</p>
+<p>Answer questions and provide files when requested, pressing enter after answering each request</p>
+<p>Some questions can be skipped if you use command line options and arguments and the <code>breed-util ask</code> subcommand<br>See <a href="#conversion-options">Conversion Options</a></p>
+<p><strong>To cancel</strong> us <code>CTRL+C</code></p>
+<h3 id="breed-conversion-manual-way">Breed Conversion - Manual Way</h3>
+<p>The manual way can speed up conversions, if you are familiar with the options you will use.<br>Many of these options can be used with the <a href="#breed-conversion-easy-way">easy way</a> as well, saving time</p>
+<p><code>breed-util convert-breed {target-game} [..options] {input sprite files}</code></p>
+<ul>
+<li><code>{taget-game}</code> - The game to convert to [C1,C2,C3]<ul>
+<li><em>No conversion to/from Creatures Village</em></li>
+</ul>
+</li>
+<li><code>[..options]</code> <em>see the <a href="#options">Options</a> section for options and definitions</em></li>
+<li><code>{files}</code> - Any sprite files needed for the conversion.<ul>
+<li>Can be a sprite folder or folders</li>
+<li>File paths in quotes separated by spaces</li>
+<li><em>see <a href="#input-files-paths">Input Files</a></em></li>
+</ul>
+</li>
+<li><code>--help</code>, <code>-h</code> -&gt; Print help information about arguments and options<ul>
+<li>Use as<code>breed-util --help</code> or <code>breed-util -h</code> without arguments or options.</li>
+</ul>
+</li>
+</ul>
+<h4 id="conversion-options">Conversion Options</h4>
+<h5 id="game-variant">Game Variant</h5>
+<ul>
+<li>C1</li>
+<li>C2</li>
+<li>C3</li>
+</ul>
+<h5 id="genus">Genus</h5>
+<ul>
+<li><strong>n</strong>[orn]</li>
+<li><strong>g</strong>[rendel]</li>
+<li><strong>e</strong>[ttin]</li>
+<li><strong>s</strong>[hee] / <strong>geat</strong><br>*Note<em> Remember, **</em>g<em> is grendel*</em> not geat</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{target game}</code></td>
+<td><a href="#game-variant-c1c2-c3">Game Variant</a></td>
+<td>Game to convert breed to [C1,C2,C3]</td>
+</tr>
+<tr>
+<td><code>--from</code></td>
+<td><a href="#game-variant-c1c2-c3">Game Variant</a></td>
+<td>Input sprite&#39;s game variant [C1,C2,C3]</td>
+</tr>
+<tr>
+<td><code>--encoding</code>, <code>-c</code></td>
+<td>[555, 565]</td>
+<td>Color encoding</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--genus</code>, <code>-g</code></td>
+<td><a href="#genus---norn-grendel-ettin-shee-geat">genus</a></td>
+<td>The output breed sprite genus</td>
+</tr>
+<tr>
+<td><code>--breed</code>, <code>-b</code></td>
+<td>A-Z or 0-9</td>
+<td>The output breed slot for these breed files</td>
+</tr>
+<tr>
+<td><code>--input-genus</code></td>
+<td><a href="#genus---norn-grendel-ettin-shee-geat">genus</a></td>
+<td>The genus to filter input files by</td>
+</tr>
+<tr>
+<td><code>--input-breed</code></td>
+<td>A-Z or 0-9</td>
+<td>The breed to filter input files by</td>
+</tr>
+<tr>
+<td><code>--force</code>, <code>-f</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Force overwrite of existing files</td>
+</tr>
+<tr>
+<td><code>--progressive</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Create front facing arm sprites from side arm sprites <br/> see <a href="#progressive-arms">Progressive Arms</a></td>
+</tr>
+<tr>
+<td><code>--keep-ages</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Do not shift ages to match target game</td>
+</tr>
+<tr>
+<td><code>--samesize</code>, <code>-z</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Make all frames in a body part the same size</td>
+</tr>
+<tr>
+<td><code>--no-tail</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Do not create tail files (even if none are present)</td>
+</tr>
+<tr>
+<td><code>--progress</code>, <code>-p</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Output file conversion progress</td>
+</tr>
+<tr>
+<td><code>--att-dir</code>, <code>-a</code></td>
+<td><a href="#input-files-paths">Input Folder</a></td>
+<td>The location of atts to convert if desired</td>
+</tr>
+<tr>
+<td><code>--output</code>, <code>-o</code></td>
+<td><a href="#input-files-paths">Output folder</a></td>
+<td>Output folder for the converted breed files</td>
+</tr>
+<tr>
+<td><code>--input-genome</code></td>
+<td><a href="#input-files-paths">Genome file</a></td>
+<td>Input genome file to alter appearance genes for</td>
+</tr>
+<tr>
+<td><code>--output-genome</code></td>
+<td><a href="#input-files-paths">File path</a></td>
+<td>Altered genome output file path</td>
+</tr>
+<tr>
+<td><code>--skip-existing</code>, <code>-x</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Skip existing files</td>
+</tr>
+<tr>
+<td><code>--ignore-errors</code>, <code>-e</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Ignore all compilation errors. <br/> Other errors will still cancel compile</td>
+</tr>
+<tr>
+<td><code>--quiet</code>, <code>-q</code></td>
+<td><a href="#flags"><em>[flag]</em></a></td>
+<td>Silence non-essential output</td>
+</tr>
+</tbody>
+</table>
+<p><strong># Example 1: Convert a breed &quot;simple&quot;</strong><br>The following would convert a breed&#39;s sprites to C3, keeping the genus, age and breed slot the same</p>
+<pre><code class="lang-console"><span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span><span class="hljs-built_in">C3</span> Images<span class="hljs-comment">/*0*8.spr Images/*4*8.spr</span>
+</code></pre>
+<p><strong># Example 1: Change slot</strong><br>The following code would produce a C3 compatible breed sprites in <code>ettin slot z</code> from a <code>norn slot 8</code></p>
+<pre><code class="lang-console"><span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span><span class="hljs-built_in">C3</span> --genus ettin --<span class="hljs-keyword">breed </span>z Images<span class="hljs-comment">/*0*8.spr Images/*4*8.spr</span>
+</code></pre>
+<p><strong># Example 3: Convert ATTs</strong><br>To convert ATTs in addition to sprites, use the <code>--att-dir, -a</code> option followed by the ATT directory
+So to convert a <code>norn slot 8</code> breed from C1 to C3 <code>ettin slot z</code> you would use:</p>
+<pre><code class="lang-console"><span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span><span class="hljs-built_in">C3</span> --genus ettin --<span class="hljs-keyword">breed </span>z --att-dir <span class="hljs-string">"Body Data"</span> Images<span class="hljs-comment">/*0*8.spr Images/*4*8.spr</span>
+</code></pre>
+<p><strong>NOTE</strong> Despite the ATTs being converted automatically.
+Care should be taken to edit head and body ATTs converted from C1/C2 as the
+tail, hair and ear positions will be set to <code>0,0</code>. This will be very noticeable when bred with other breeds</p>
+<p><strong># Example 4: Without tail</strong><br>The prior commands will produce tail sprites (and atts if --att-dir is set)
+by default if one does not exist for the breed.<br>To prevent this, use the <code>--no-tail</code> flag.<br>The following would produce norn sprites and ATTs for parts <code>a</code> to <code>l</code>, but not <code>m</code> or <code>n</code>.</p>
+<pre><code class="lang-console"><span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span><span class="hljs-built_in">C3</span> --genus ettin --<span class="hljs-keyword">breed </span>z --no-tail --att-dir <span class="hljs-string">"Body Data"</span> Images<span class="hljs-comment">/*0*8.spr Images/*4*8.spr</span>
+</code></pre>
+<p><strong># Example 5: Remap a breed</strong><br>You can technically remap a breed by passing in the same game as the one it is for, but with different slot
+information<br>The following would create a copy of norn slot <code>a</code> into ettin slot <code>z</code>;
+** Be sure to include the <code>--att-dir</code> flag or the body data will not be remapped</p>
+<pre><code class="lang-console"><span class="hljs-keyword">breed-util </span>convert-<span class="hljs-keyword">breed </span><span class="hljs-built_in">C3</span> --genus ettin --<span class="hljs-keyword">breed </span>z --att-dir <span class="hljs-string">"Body Data"</span> Images<span class="hljs-comment">/*0*a.c16 Images/*4*a.c16</span>
+</code></pre>
+<hr>
+<h2 id="alter-genome">Alter-Genome</h2>
+<p>The alter genome command, alters a genome&#39;s appearance genes.
+This allows you to set different genus/breeds per part</p>
+<p>Appearance genes follow the format: <code>{genus}:{breed}</code>.<br>Genus can be <code>norn</code> or <code>n</code>, <code>grendel</code> or <code>g</code>, <code>ettin</code> or <code>e</code>, <code>geat</code> or <code>shee</code> or <code>s</code>.<br><strong>NOTE:</strong> The shorthand for GEAT is &#39;<strong>S</strong>&#39; not &#39;G&#39;. <strong>&#39;G&#39; is for Grendel only</strong></p>
+<pre><code>Arguments: 
+    <span class="hljs-function"><span class="hljs-title">input</span>-genome -&gt;</span> The genome to alter { String }
+    <span class="hljs-function"><span class="hljs-title">output</span>-genome -&gt;</span> Altered genome output file <span class="hljs-built_in">path</span> { String }
+Options: 
+    --<span class="hljs-function"><span class="hljs-title">genome</span>-genus -&gt;</span> The genus of the creature, separate from appearance.
+    --<span class="hljs-function"><span class="hljs-title">alter</span>-sleep, -s [flag] -&gt;</span> Alter sleep/death pose <span class="hljs-keyword">for</span> C1e to C2e conversions. 
+    --<span class="hljs-function"><span class="hljs-title">force</span>, -f [flag] -&gt;</span> Force overwrite of existing files 
+    --<span class="hljs-function"><span class="hljs-title">skip</span>-existing, -x [flag] -&gt;</span> Skip existing files 
+    --<span class="hljs-function"><span class="hljs-title">help</span>, -h -&gt;</span> Usage info 
+Breed: 
+    Expected pattern {genus}:{breed};
+    i.e. <span class="hljs-string">"norn:z"</span> <span class="hljs-built_in">or</span> <span class="hljs-string">"n:z"</span>
+    --<span class="hljs-function"><span class="hljs-title">breed</span>, -b -&gt;</span> The breed to use <span class="hljs-keyword">for</span> body parts <span class="hljs-built_in">not</span> overwritten <span class="hljs-keyword">by</span> other options 
+    --<span class="hljs-function"><span class="hljs-title">head</span> -&gt;</span> Breed <span class="hljs-keyword">for</span> head
+    --<span class="hljs-function"><span class="hljs-title">body</span> -&gt;</span> Breed <span class="hljs-keyword">for</span> body
+    --<span class="hljs-function"><span class="hljs-title">legs</span> -&gt;</span> Breed <span class="hljs-keyword">for</span> legs
+    --<span class="hljs-function"><span class="hljs-title">arms</span> -&gt;</span> Breed <span class="hljs-keyword">for</span> arms
+    --<span class="hljs-function"><span class="hljs-title">tail</span> -&gt;</span> Breed <span class="hljs-keyword">for</span> tail
+    --<span class="hljs-function"><span class="hljs-title">hair</span> -&gt;</span> Breed <span class="hljs-keyword">for</span> hair
+Color: Value: <span class="hljs-number">0</span>-<span class="hljs-number">255</span>; <span class="hljs-number">128</span> = Default (no tint/swap/rotation applied)
+    --<span class="hljs-function"><span class="hljs-title">red</span> -&gt;</span> Red tint to apply [<span class="hljs-number">0</span>..<span class="hljs-number">255</span>]
+    --<span class="hljs-function"><span class="hljs-title">green</span> -&gt;</span> Green tint to apply [<span class="hljs-number">0</span>..<span class="hljs-number">255</span>]
+    --<span class="hljs-function"><span class="hljs-title">blue</span> -&gt;</span> Blue tint to apply { Int }
+    --<span class="hljs-function"><span class="hljs-title">swap</span> -&gt;</span> Color swap between red <span class="hljs-built_in">and</span> blue { Int }
+    --<span class="hljs-function"><span class="hljs-title">rotation</span> -&gt;</span> Color rotation <span class="hljs-built_in">or</span> shifting of red, green <span class="hljs-built_in">and</span> blue channels
+</code></pre><h3 id="usage">Usage</h3>
+<p><strong># Change all parts to same genus/breed</strong><br>To alter a genome to use norn slot for all body parts and save to a new file called <code>norn.new.gen</code>, use:</p>
+<pre><code class="lang-console">breed-util alter-genome ./norn<span class="hljs-selector-class">.existing</span><span class="hljs-selector-class">.gen</span> ./norn<span class="hljs-selector-class">.new</span><span class="hljs-selector-class">.gen--breed</span> n:a
+</code></pre>
+<p><strong># Change head only</strong>
+To change only the head to a new file called <code>norn.new.gen</code>, use:</p>
+<pre><code class="lang-console">breed-util alter-genome ./norn<span class="hljs-selector-class">.existing</span><span class="hljs-selector-class">.gen</span> ./norn<span class="hljs-selector-class">.new</span><span class="hljs-selector-class">.gen</span> --head n:a
+</code></pre>
+<p>**# To Change Colors
+To change the tint of a genome and save it to a file called <code>norn.new.gen</code>, use:</p>
+<pre><code class="lang-console">breed-util alter-genome ./norn<span class="hljs-selector-class">.existing</span><span class="hljs-selector-class">.gen</span> ./norn<span class="hljs-selector-class">.new</span><span class="hljs-selector-class">.gen</span> --tint <span class="hljs-number">10</span>:<span class="hljs-number">10</span>:<span class="hljs-number">255</span>
+</code></pre>
+<p>**# To change swap and rotate
+To change swap and rotate (which can be used independently of each other) use:</p>
+<pre><code class="lang-console">breed-util alter-genome ./norn<span class="hljs-selector-class">.existing</span><span class="hljs-selector-class">.gen</span> ./norn<span class="hljs-selector-class">.new</span><span class="hljs-selector-class">.gen</span>  --swap <span class="hljs-number">20</span> --rotation <span class="hljs-number">20</span>
+</code></pre>
+<h2 id="appendix-macos">Appendix: macOS</h2>
+<h3 id="open-terminal">Open Terminal</h3>
+<p>You can open terminal through <a href="#open-terminal-from-spotlight">spotlight</a> or <a href="#open-terminal-through-finder">Finder</a></p>
+<h4 id="open-terminal-from-spotlight">Open Terminal From Spotlight</h4>
+<ol>
+<li>Open Spotlight<ul>
+<li>Shortcut Key - <code>CMND+SPACE</code></li>
+<li>OR Click the magnifying-glass icon on the menubar in the upper right</li>
+</ul>
+</li>
+<li>Type in <code>Terminal</code></li>
+<li>Select <code>Terminal.app</code> and hit enter</li>
+<li>[Optional] Set your current working directory if desired using <code>cd</code> (see <a href="#current-working-directory">current working directory</a>)</li>
+</ol>
+<h4 id="open-terminal-through-finder">Open Terminal Through Finder</h4>
+<ol>
+<li>Open Finder</li>
+<li>Open the <code>Applications</code> Folder</li>
+<li>Open the <code>Utilities</code> folder</li>
+<li>Double Click <code>Terminal.app</code></li>
+<li>[Optional] Set your current working directory if desired using <code>cd</code> (see <a href="#current-working-directory">current working directory</a>)</li>
+</ol>
+<h3 id="gatekeeper">GATEKEEPER</h3>
+<p>MacOS may prevent you from opening the executable as the binary is not signed</p>
+<h4 id="allow-program-in-terminal">Allow Program in Terminal</h4>
+<ol>
+<li>copy and paste <code>xattr -d com.apple.quarantine</code></li>
+<li>Add a space after it</li>
+<li>Drag the <code>breed-util</code> executable into the folder and hit enter</li>
+<li>Enter password if prompted</li>
+</ol>
+<h4 id="allow-program-in-system-setting">Allow Program in System Setting</h4>
+<ol>
+<li>Open System Settings</li>
+<li>On the left side find <code>Privacy and Security</code></li>
+<li>Find <code>Security</code></li>
+<li>Click <code>Open Anyways</code></li>
+<li>Enter Password if prompted</li>
+</ol>
+<h2 id="appendix-windows">Appendix: Windows</h2>
+<h3 id="open-cmd-command-line-window-">Open CMD (command line window)</h3>
+<ol>
+<li>Click the search bar next to the windows icon</li>
+<li>Type <code>CMD</code></li>
+<li>Click <code>Command Prompt</code></li>
+<li>[Optional] Set your current working directory if desired using <code>cd</code> (see <a href="#current-working-directory">current working directory</a>)</li>
+</ol>
+</div>
+</body>
+</html>
