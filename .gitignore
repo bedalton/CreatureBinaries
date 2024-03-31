@@ -1,4 +1,4 @@
-**/Native-Image
-**/Kotlin-Native
-**/Releases
-*.jar
+#**/Native-Image
+#**/Kotlin-Native
+#**/Releases
+#*.jar
