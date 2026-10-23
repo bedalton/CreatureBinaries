@@ -2,3 +2,4 @@
 #**/Kotlin-Native
 #**/Releases
 #*.jar
+.DS_Store
